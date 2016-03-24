@@ -77,10 +77,27 @@ def perceptron_train(data):
 	return w, errorCount, step
 
 def perceptron_test(data, w):
-	print 'testando'
+        dimension = len(data[0][1])
+        w = numpy.array([0] * dimension)
+        errorCount = 0.0
+	total = 0.0
+
+        for record in data:
+		total += 1.0
+        	r = numpy.dot(w, record[1])
+                log.debug(w)
+                if r > 0 and record[0] == 0:
+                	#error: missclassified a non spam email as spam
+                        errorCount += 1.0
+		elif r <= 0 and record[0] == 1:
+                	#error: missclassified a spam email as non spam
+                        errorCount += 1.0
+
+
+        return errorCount/total
 
 def main(argv=sys.argv):
-	log.basicConfig(format='%(levelname)s:%(message)s', filename='/tmp/run.log', level=log.DEBUG)		
+	log.basicConfig(format='%(levelname)s:%(message)s', filename='/tmp/run.log', level=log.INFO)		
 	log.info('########### Execution starts ###########')	
 	try:
         	opts, args = getopt.getopt(sys.argv[1:], 'v:t:')
@@ -103,14 +120,14 @@ def main(argv=sys.argv):
 	if trainingFileName != None:
 		data, vocabulary = getDataFromFile(trainingFileName)
 		w, errorCount, step = perceptron_train(data)
-		print '[', 
-		for e in w: print str(e) + ',', 
-		print ']'
 		print 'Updates count:' + str(errorCount)
 		print 'Steps run:' + str(step)
 
 		if validationFileName != None:
-			print 'test'
+			data = convertText2FeatureArray(validationFileName, vocabulary)
+			errorRate = perceptron_test(data, w)
+			
+			print("%.2f" % errorRate)
 
 	log.info('########### Execution finished ###########')
 
