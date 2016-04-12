@@ -41,7 +41,8 @@ def convertText2FeatureArray(fileName, vocabulary):
                                 emailFeatures.append(1)
                         else:
                                 emailFeatures.append(0)
-                data.append([int(lineSplit[0]), numpy.array(emailFeatures)])
+		classification = -1 if lineSplit[0] == '0' else 1
+                data.append([classification, numpy.array(emailFeatures)])
 
         f.close()
         log.debug(vocabulary)
@@ -49,81 +50,77 @@ def convertText2FeatureArray(fileName, vocabulary):
 	return data
 
 
-#Trains a perceptron classifier using the examples provided to the function, and return the final classification vector, the number of updates (mistakes) performed, and the number of passes through the data, respectively. For the corner case of w.x = 0, predict the +1 (spam) class.
-def perceptron_train(data):
-	allCorrect = False
+def pegasos_svm_train(data, lambd):
+	max_epoch = 20
+	current_epoch = 0
+	step = 0
 	dimension = len(data[0][1])
 	w = numpy.array([0] * dimension)
-	errorCount = 0
-	step = 0
+	f_w = 0.0
+	while current_epoch < max_epoch:
+		step += 1.0
+		n_t  = 1.0/(step * lambd)
+		total = 0.0
+		m = 1.0
+		errorCount = 0.0
 
-	while not allCorrect:
-		step = step + 1
-		allCorrect = True
-		i = 0
 		for record in data:
-			i += 1
 			r = numpy.dot(w, record[1])
-			if r >= 0 and record[0] == 0:
-				#error: missclassified a non spam email as spam
-				errorCount += 1
-				allCorrect = False
-				w = w + record[1] * -1
-				log.debug('1 - [%s] r=%s c=%s %s %s %s', i, r, record[0], step, errorCount, w)
-			elif r < 0 and record[0] == 1:
-				#error: missclassified a spam email as non spam
-				errorCount += 1
-				allCorrect = False
-				w = w + record[1] * 1
-				log.debug('2 - [%s] r=%s c=%s %s %s %s', i, r, record[0], step, errorCount, w)
-	
-	return w, errorCount, step
+			total = 1.0 - (record[0] * numpy.dot(w, record[1]))
+			m += 1.0
+			
+			if r * record[0] < 0.0:
+				errorCount += 1.0	
+			
+			if r * record[0] < 1.0:
+                	        w = (1.0 - (1.0/step)) * w + ((n_t * record[0]) * record[1])
+			else:
+        	                w = (1.0 - (1.0/step)) * w
 
-def perceptron_test(data, w):
-        dimension = len(data[0][1])
+		#calculate f(w)
+		f_w = (lambd/2.0) * pow(numpy.linalg.norm(w),2)
+		f_w = f_w + (total/m)
+
+		current_epoch += 1
+		print 'Epoch: {0} f(w): {1}'.format(current_epoch, f_w)
+		print 'Epoch: {0} error rate: {1}'.format(current_epoch, errorCount/m)
+
+	print 'Train f(w)', f_w
+	return w
+
+	
+def pegasos_svm_test(data, w, lambd):
         errorCount = 0.0
 	total = 0.0
+	m = 1.0
 
-        for record in data:
-		total += 1.0
-        	r = numpy.dot(w, record[1])
-                if r > 0 and record[0] == 0:
-                	#error: missclassified a non spam email as spam
-                        errorCount += 1.0
-		elif r <= 0 and record[0] == 1:
-                	#error: missclassified a spam email as non spam
-                        errorCount += 1.0
+	for record in data:
+		r = numpy.dot(w, record[1])
+                total = 1.0 - (record[0] * numpy.dot(w, record[1]))
+                m += 1.0
+
+                if r * record[0] < 0:
+			errorCount += 1
+
+                #calculate f(w)
+                f_w = (lambd/2.0) * pow(numpy.linalg.norm(w),2)
+                f_w = f_w + (total/m)
 
 
-        return errorCount/total
-
-def printTopFeatures(w, vocabulary):
-	negativec = Counter()
-	positivec = Counter()
-	i = 0
-
-	for word in vocabulary.keys():
-		if w[i] >= 0:
-			positivec[word] = w[i]
-		else:
-			negativec[word] = w[i] * -1
-		i += 1		
-	
-	print 'Spam likely: ', positivec.most_common(15)
-	print 'Non spam likely: ', negativec.most_common(15)
+        return errorCount/m, f_w
 
 
 def main(argv=sys.argv):
 	log.basicConfig(format='%(levelname)s:%(message)s', filename='/tmp/run.log', level=log.DEBUG)		
 	log.info('########### Execution starts ###########')	
 	try:
-        	opts, args = getopt.getopt(sys.argv[1:], 'v:t:')
+        	opts, args = getopt.getopt(sys.argv[1:], 'v:t:e:')
     	except getopt.GetoptError as err:
 	        print str(err) 
 	        sys.exit(2)
 	trainingFileName = None
     	validationFileName = None
-
+	exponent = 5
     	for o, a in opts:
         	if o == '-t':
 			log.debug('Configuring testing file name: %s', a)
@@ -131,21 +128,22 @@ def main(argv=sys.argv):
         	elif o == '-v':
 			log.debug('Configuring validation file name: %s', a)
             		validationFileName = a
+		elif o == '-e':
+			exponent = int(a)
         	else:
 	            assert False, "unhandled option"
 
+	print 'lambd = 2^', exponent
+
 	if trainingFileName != None:
 		data, vocabulary = getDataFromFile(trainingFileName)
-		w, errorCount, step = perceptron_train(data)
-		print errorCount, step, 
+		w = pegasos_svm_train(data, pow(2,exponent))
 
 		if validationFileName != None:
 			data = convertText2FeatureArray(validationFileName, vocabulary)
-			errorRate = perceptron_test(data, w)
-			
-			print("%.4f" % errorRate)
-
-		printTopFeatures(w, vocabulary)
+			errorRate, f_w = pegasos_svm_test(data, w, pow(2,exponent))
+			print('Validation %.6f' % f_w),
+			print('Validation Error Rate %.6f' % errorRate)
 
 	log.info('########### Execution finished ###########')
 

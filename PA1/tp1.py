@@ -60,32 +60,33 @@ def perceptron_train(data):
 	while not allCorrect:
 		step = step + 1
 		allCorrect = True
+		i = 0
 		for record in data:
+			i += 1
 			r = numpy.dot(w, record[1])
-			log.debug(w)
-			if r > 0 and record[0] == 0:
+			if r >= 0 and record[0] == 0:
 				#error: missclassified a non spam email as spam
 				errorCount += 1
 				allCorrect = False
 				w = w + record[1] * -1
-			elif r <= 0 and record[0] == 1:
+				log.debug('1 - [%s] r=%s c=%s %s %s %s', i, r, record[0], step, errorCount, w)
+			elif r < 0 and record[0] == 1:
 				#error: missclassified a spam email as non spam
 				errorCount += 1
 				allCorrect = False
 				w = w + record[1] * 1
+				log.debug('2 - [%s] r=%s c=%s %s %s %s', i, r, record[0], step, errorCount, w)
 	
 	return w, errorCount, step
 
 def perceptron_test(data, w):
         dimension = len(data[0][1])
-        w = numpy.array([0] * dimension)
         errorCount = 0.0
 	total = 0.0
 
         for record in data:
 		total += 1.0
         	r = numpy.dot(w, record[1])
-                log.debug(w)
                 if r > 0 and record[0] == 0:
                 	#error: missclassified a non spam email as spam
                         errorCount += 1.0
@@ -96,8 +97,24 @@ def perceptron_test(data, w):
 
         return errorCount/total
 
+def printTopFeatures(w, vocabulary):
+	negativec = Counter()
+	positivec = Counter()
+	i = 0
+
+	for word in vocabulary.keys():
+		if w[i] >= 0:
+			positivec[word] = w[i]
+		else:
+			negativec[word] = w[i] * -1
+		i += 1		
+	
+	print 'Spam likely: ', positivec.most_common(15)
+	print 'Non spam likely: ', negativec.most_common(15)
+
+
 def main(argv=sys.argv):
-	log.basicConfig(format='%(levelname)s:%(message)s', filename='/tmp/run.log', level=log.INFO)		
+	log.basicConfig(format='%(levelname)s:%(message)s', filename='/tmp/run.log', level=log.DEBUG)		
 	log.info('########### Execution starts ###########')	
 	try:
         	opts, args = getopt.getopt(sys.argv[1:], 'v:t:')
@@ -120,14 +137,15 @@ def main(argv=sys.argv):
 	if trainingFileName != None:
 		data, vocabulary = getDataFromFile(trainingFileName)
 		w, errorCount, step = perceptron_train(data)
-		print 'Updates count:' + str(errorCount)
-		print 'Steps run:' + str(step)
+		print errorCount, step, 
 
 		if validationFileName != None:
 			data = convertText2FeatureArray(validationFileName, vocabulary)
 			errorRate = perceptron_test(data, w)
 			
-			print("%.2f" % errorRate)
+			print("%.4f" % errorRate)
+
+		printTopFeatures(w, vocabulary)
 
 	log.info('########### Execution finished ###########')
 

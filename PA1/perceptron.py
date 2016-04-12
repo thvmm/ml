@@ -98,19 +98,21 @@ def perceptron_test(data, w):
         return errorCount/total
 
 def printTopFeatures(w, vocabulary):
-	negativec = Counter()
-	positivec = Counter()
-	i = 0
+	mostPositiveIndexes = w.argsort()[-15::]
+	mostNegativeIndexes = w.argsort()[:15]
 
-	for word in vocabulary.keys():
-		if w[i] >= 0:
-			positivec[word] = w[i]
-		else:
-			negativec[word] = w[i] * -1
-		i += 1		
-	
-	print 'Spam likely: ', positivec.most_common(15)
-	print 'Non spam likely: ', negativec.most_common(15)
+	positiveFeatures = []
+	negativeFeatures = []
+
+	for i in mostPositiveIndexes:
+		positiveFeatures.append([vocabulary.keys()[i], w[i]])		
+
+	for i in mostNegativeIndexes:
+                negativeFeatures.append([vocabulary.keys()[i], w[i]])
+
+
+	print 'Spam likely: ', positiveFeatures 
+	print 'Non spam likely: ', negativeFeatures
 
 
 def main(argv=sys.argv):
