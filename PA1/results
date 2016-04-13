@@ -1,19 +1,18 @@
 53 9 0.1180
-Spam likely:  [('our', 12), ('by', 8), ('name', 8), ('pleas', 6), ('do', 6), ('will', 6), ('we', 5), ('servic', 5), ('can', 5), ('thi', 5), ('be', 4), ('is', 4), ('ar', 4), ('your', 4), ('no', 4)]
-Non spam likely:  [('at', 9), ('get', 8), ('httpaddr', 7), ('server', 7), ('system', 6), ('then', 6), ('think', 6), ('comput', 5), ('home', 5), ('but', 5), ('user', 5), ('s', 5), ('the', 4), ('ve', 4), ('it', 4)]
+Spam likely:  [['no', 4], ['your', 4], ['is', 4], ['be', 4], ['ar', 4], ['thi', 5], ['servic', 5], ['can', 5], ['we', 5], ['do', 6], ['will', 6], ['pleas', 6], ['name', 8], ['by', 8], ['our', 12]]
+Non spam likely:  [['at', -9], ['get', -8], ['httpaddr', -7], ['server', -7], ['think', -6], ['then', -6], ['system', -6], ['comput', -5], ['s', -5], ['user', -5], ['but', -5], ['home', -5], ['so', -4], ['look', -4], ['wa', -4]]
 61 6 0.0580
-Spam likely:  [('our', 11), ('remov', 7), ('free', 7), ('monei', 6), ('name', 6), ('provid', 5), ('pleas', 5), ('click', 5), ('best', 5), ('state', 5), ('life', 5), ('servic', 5), ('will', 5), ('inform', 5), ('becaus', 4)]
-Non spam likely:  [('wrote', 8), ('server', 6), ('re', 6), ('chang', 6), ('emailaddr', 6), ('look', 6), ('up', 6), ('it', 6), ('file', 6), ('run', 5), ('httpaddr', 5), ('call', 5), ('user', 5), ('good', 4), ('subject', 4)]
+Spam likely:  [['becaus', 4], ['will', 5], ['pleas', 5], ['best', 5], ['provid', 5], ['state', 5], ['inform', 5], ['servic', 5], ['click', 5], ['life', 5], ['name', 6], ['monei', 6], ['free', 7], ['remov', 7], ['our', 11]]
+Non spam likely:  [['wrote', -8], ['server', -6], ['up', -6], ['chang', -6], ['look', -6], ['emailaddr', -6], ['re', -6], ['file', -6], ['it', -6], ['httpaddr', -5], ['run', -5], ['user', -5], ['call', -5], ['at', -4], ['date', -4]]
 95 8 0.0510
-Spam likely:  [('our', 12), ('remov', 10), ('pleas', 10), ('guarante', 10), ('these', 9), ('will', 9), ('secur', 9), ('name', 8), ('order', 7), ('dollar', 6), ('monei', 6), ('lose', 6), ('full', 6), ('email', 6), ('opportun', 6)]
-Non spam likely:  [('re', 9), ('i', 9), ('thei', 8), ('wrote', 8), ('server', 7), ('httpaddr', 7), ('messag', 7), ('user', 7), ('date', 7), ('read', 6), ('run', 6), ('post', 6), ('wai', 6), ('next', 6), ('hi', 6)]
+Spam likely:  [['opportun', 6], ['legal', 6], ['full', 6], ['monei', 6], ['dollar', 6], ['lose', 6], ['order', 7], ['name', 8], ['will', 9], ['these', 9], ['secur', 9], ['guarante', 10], ['remov', 10], ['pleas', 10], ['our', 12]]
+Non spam likely:  [['i', -9], ['re', -9], ['thei', -8], ['wrote', -8], ['user', -7], ['date', -7], ['httpaddr', -7], ['messag', -7], ['server', -7], ['those', -6], ['next', -6], ['hi', -6], ['file', -6], ['at', -6], ['look', -6]]
 126 6 0.0330
-Spam likely:  [('our', 16), ('click', 11), ('thousand', 10), ('will', 10), ('guarante', 10), ('pleas', 9), ('within', 9), ('below', 9), ('risk', 8), ('deal', 8), ('your', 8), ('follow', 7), ('hour', 7), ('simpl', 7), ('order', 7)]
-Non spam likely:  [('messag', 10), ('i', 10), ('thei', 9), ('wrote', 9), ('next', 7), ('could', 7), ('m', 7), ('at', 7), ('public', 6), ('re', 6), ('httpaddr', 6), ('and', 6), ('which', 6), ('though', 6), ('read', 6)]
+Spam likely:  [['order', 7], ['simpl', 7], ['hour', 7], ['remov', 7], ['deal', 8], ['your', 8], ['risk', 8], ['pleas', 9], ['within', 9], ['below', 9], ['will', 10], ['guarante', 10], ['thousand', 10], ['click', 11], ['our', 16]]
+Non spam likely:  [['i', -10], ['messag', -10], ['thei', -9], ['wrote', -9], ['m', -7], ['at', -7], ['could', -7], ['next', -7], ['public', -6], ['which', -6], ['re', -6], ['httpaddr', -6], ['benefit', -6], ['read', -6], ['and', -6]]
 261 10 0.0190
-Spam likely:  [('remov', 16), ('pleas', 14), ('click', 14), ('these', 14), ('guarante', 14), ('hour', 13), ('our', 13), ('will', 12), ('order', 12), ('sight', 11), ('here', 10), ('internet', 10), ('yourself', 10), ('final', 10), ('present', 10)]
-Non spam likely:  [('system', 13), ('wrote', 13), ('august', 13), ('ll', 12), ('relat', 10), ('group', 10), ('which', 10), ('fun', 10), ('newslett', 10), ('address', 9), ('technolog', 9), ('on', 9), ('date', 9), ('comput', 9), ('seem', 9)]
+Spam likely:  [['here', 10], ['final', 10], ['thousand', 10], ['yourself', 10], ['internet', 10], ['sight', 11], ['order', 12], ['will', 12], ['hour', 13], ['our', 13], ['guarante', 14], ['these', 14], ['pleas', 14], ['click', 14], ['remov', 16]]
+Non spam likely:  [['system', -13], ['august', -13], ['wrote', -13], ['ll', -12], ['group', -10], ['which', -10], ['fun', -10], ['relat', -10], ['newslett', -10], ['url', -9], ['date', -9], ['rpm', -9], ['technolog', -9], ['seem', -9], ['reduc', -9]]
 433 10 0.0230
-Spam likely:  [('sight', 18), ('click', 18), ('remov', 17), ('minut', 15), ('internet', 14), ('deathtospamdeathtospamdeathtospam', 14), ('our', 14), ('market', 13), ('pleas', 13), ('bodi', 13), ('mai', 12), ('yourself', 12), ('am', 12), ('most', 12), ('immedi', 12)]
-Non spam likely:  [('wrote', 17), ('i', 13), ('prefer', 12), ('still', 12), ('copyright', 12), ('said', 11), ('were', 11), ('review', 11), ('execut', 11), ('reserv', 11), ('standard', 10), ('tom', 10), ('seem', 10), ('bottom', 10), ('date', 10)]
-
+Spam likely:  [['immedi', 12], ['guarante', 12], ['most', 12], ['mai', 12], ['yourself', 12], ['market', 13], ['bodi', 13], ['pleas', 13], ['internet', 14], ['our', 14], ['deathtospamdeathtospamdeathtospam', 14], ['minut', 15], ['remov', 17], ['click', 18], ['sight', 18]]
+Non spam likely:  [['wrote', -17], ['i', -13], ['copyright', -12], ['still', -12], ['prefer', -12], ['execut', -11], ['reserv', -11], ['review', -11], ['were', -11], ['said', -11], ['next', -10], ['recipi', -10], ['date', -10], ['bottom', -10], ['version', -10]]

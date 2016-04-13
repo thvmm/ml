@@ -51,7 +51,7 @@ def convertText2FeatureArray(fileName, vocabulary):
 
 
 def pegasos_svm_train(data, lambd):
-	max_epoch = 20
+	max_epoch = 200
 	current_epoch = 0
 	step = 0
 	dimension = len(data[0][1])
@@ -82,9 +82,9 @@ def pegasos_svm_train(data, lambd):
 		f_w = f_w + (total/m)
 
 		current_epoch += 1
-		print 'Epoch: {0} f(w): {1}'.format(current_epoch, f_w)
-		print 'Epoch: {0} error rate: {1}'.format(current_epoch, errorCount/m)
+#		print 'Epoch: {0} f(w): {1}'.format(current_epoch, f_w)
 
+	print 'Train Error rate: {0}'.format(errorCount/m)
 	print 'Train f(w)', f_w
 	return w
 

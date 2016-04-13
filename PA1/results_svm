@@ -1,0 +1,60 @@
+lambd = 2^ 5
+Train Error rate: 0.312171957011
+Train f(w) 0.0405008025959
+Validation 0.041176 Validation Error Rate 0.300699
+lambd = 2^ 4
+Train Error rate: 0.310922269433
+Train f(w) 0.0704275403308
+Validation 0.071035 Validation Error Rate 0.299700
+lambd = 2^ 3
+Train Error rate: 0.307173206698
+Train f(w) 0.0944654255668
+Validation 0.095003 Validation Error Rate 0.269730
+lambd = 2^ 2
+Train Error rate: 0.277680579855
+Train f(w) 0.1339035439
+Validation 0.134373 Validation Error Rate 0.081918
+lambd = 2^ 1
+Train Error rate: 0.147713071732
+Train f(w) 0.221563819316
+Validation 0.221902 Validation Error Rate 0.053946
+lambd = 2^ 0
+Train Error rate: 0.0832291927018
+Train f(w) 0.268238104585
+Validation 0.268430 Validation Error Rate 0.035964
+lambd = 2^ -1
+Train Error rate: 0.0684828792802
+Train f(w) 0.303663170177
+Validation 0.303514 Validation Error Rate 0.035964
+lambd = 2^ -2
+Train Error rate: 0.0687328167958
+Train f(w) 0.33212496377
+Validation 0.331445 Validation Error Rate 0.062937
+lambd = 2^ -3
+Train Error rate: 0.0759810047488
+Train f(w) 0.400341233634
+Validation 0.400576 Validation Error Rate 0.042957
+lambd = 2^ -4
+Train Error rate: 0.0959760059985
+Train f(w) 0.364558417931
+Validation 0.364909 Validation Error Rate 0.054945
+lambd = 2^ -5
+Train Error rate: 0.107223194201
+Train f(w) 1.03635761722
+Validation 1.035129 Validation Error Rate 0.057942
+lambd = 2^ -6
+Train Error rate: 0.112971757061
+Train f(w) 1.18866053176
+Validation 1.184546 Validation Error Rate 0.041958
+lambd = 2^ -7
+Train Error rate: 0.117470632342
+Train f(w) 3.91737640628
+Validation 3.905091 Validation Error Rate 0.064935
+lambd = 2^ -8
+Train Error rate: 0.123469132717
+Train f(w) 6.68047815144
+Validation 6.680089 Validation Error Rate 0.045954
+lambd = 2^ -9
+Train Error rate: 0.120219945014
+Train f(w) 8.03805765251
+Validation 8.023566 Validation Error Rate 0.077922
