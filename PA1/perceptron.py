@@ -87,10 +87,10 @@ def perceptron_test(data, w):
         for record in data:
 		total += 1.0
         	r = numpy.dot(w, record[1])
-                if r > 0 and record[0] == 0:
+                if r >= 0 and record[0] == 0:
                 	#error: missclassified a non spam email as spam
                         errorCount += 1.0
-		elif r <= 0 and record[0] == 1:
+		elif r < 0 and record[0] == 1:
                 	#error: missclassified a spam email as non spam
                         errorCount += 1.0
 
