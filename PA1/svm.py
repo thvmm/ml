@@ -69,9 +69,9 @@ def pegasos_svm_train(data, lambd):
 			total += 1.0 - (record[0] * numpy.dot(w, record[1]))
 			m += 1.0
 			
-			if r * record[0] < 0.0:
+			if r * record[0] < 0.0 or (r == 0 and record[0] == -1):
 				errorCount += 1.0	
-			
+		
 			if r * record[0] < 1.0:
                 	        w = (1.0 - (1.0/step)) * w + ((n_t * record[0]) * record[1])
 			else:
@@ -100,7 +100,7 @@ def pegasos_svm_test(data, w, lambd):
                 total += 1.0 - (record[0] * numpy.dot(w, record[1]))
                 m += 1.0
 
-                if r * record[0] < 0:
+		if r * record[0] < 0.0 or (r == 0 and record[0] == -1):
 			errorCount += 1
 
                 #calculate f(w)
