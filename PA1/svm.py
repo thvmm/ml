@@ -83,7 +83,7 @@ def pegasos_svm_train(data, lambd):
 
 		current_epoch += 1
 		#print 'Epoch: {0} f(w): {1}'.format(current_epoch, f_w)
-		#print 'Epoch: {0} error: {1}'.format(current_epoch, errorCount/m)
+		print 'Epoch: {0} error: {1}'.format(current_epoch, errorCount/m)
 
 	print 'Train Error rate: {0}'.format(errorCount/m)
 	print 'Train f(w)', f_w
